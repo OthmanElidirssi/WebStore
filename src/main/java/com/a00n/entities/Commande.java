@@ -8,6 +8,7 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,7 +19,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -41,14 +42,19 @@ public class Commande implements Serializable {
     private Integer id;
     @Column(name = "date_commande")
     @Temporal(TemporalType.DATE)
-    private Date dateCommande;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "commande")
+    private LocalDate  dateCommande;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "commande", fetch = FetchType.EAGER)
     private List<LigneCommandeProduit> ligneCommandeProduitList;
 
     public Commande() {
-        this.dateCommande = new Date();
+//        this.dateCommande = new Date();
     }
 
+    public Commande(LocalDate  dateCommande) {
+        this.dateCommande = dateCommande;
+    }
+    
+    
     public Integer getId() {
         return id;
     }
@@ -57,11 +63,11 @@ public class Commande implements Serializable {
         this.id = id;
     }
 
-    public Date getDateCommande() {
+    public LocalDate  getDateCommande() {
         return dateCommande;
     }
 
-    public void setDateCommande(Date dateCommande) {
+    public void setDateCommande(LocalDate  dateCommande) {
         this.dateCommande = dateCommande;
     }
 

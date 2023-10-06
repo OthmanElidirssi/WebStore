@@ -1,5 +1,6 @@
 package com.a00n.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -26,11 +27,14 @@ public class LigneCommandeProduit implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected LigneCommandeProduitPK ligneCommandeProduitPK;
+    
     @Column(name = "quantity")
     private Integer quantity;
+    
     @JoinColumn(name = "commande_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Commande commande;
+    
     @JoinColumn(name = "produit_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Produit produit;

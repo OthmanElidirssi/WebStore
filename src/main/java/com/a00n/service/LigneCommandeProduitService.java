@@ -2,6 +2,7 @@ package com.a00n.service;
 
 import com.a00n.dao.IDao;
 import com.a00n.entities.LigneCommandeProduit;
+import com.a00n.entities.LigneCommandeProduitPK;
 import com.a00n.utils.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
@@ -31,6 +32,21 @@ public class LigneCommandeProduitService implements IDao<LigneCommandeProduit> {
         try {
             HibernateUtil.getSessionFactory().inTransaction(session -> {
                 session.remove(o);
+            });
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean deleteById(LigneCommandeProduitPK pk) {
+        try {
+            HibernateUtil.getSessionFactory().inTransaction(session -> {
+                LigneCommandeProduit ligneCommandeProduitToDelete = session.get(LigneCommandeProduit.class, pk);
+                if (ligneCommandeProduitToDelete != null) {
+                    session.delete(ligneCommandeProduitToDelete);
+                }
             });
             return true;
         } catch (Exception e) {
@@ -93,6 +109,31 @@ public class LigneCommandeProduitService implements IDao<LigneCommandeProduit> {
                 tx.rollback();
             }
             return ligneCommandeProtuit;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+    
+    public LigneCommandeProduit findByIdKey(LigneCommandeProduitPK id) {
+        LigneCommandeProduit ligneCommandeProduit = null;
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            
+            ligneCommandeProduit = session.get(LigneCommandeProduit.class, id);
+
+            tx.commit();
+            return ligneCommandeProduit;
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            return null;
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
