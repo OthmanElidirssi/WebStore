@@ -5,13 +5,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Produits</title>
+        <link rel="icon" href="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" type="image/x-icon">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sira-ui/tailwind/dist/css/styles.css" />
         <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
     </head>
     <body>
-        <div class="flex flex-col w-full h-screen">
+        <div class="flex flex-col w-full bg-gray-200">
             <%@include file="includes/navbar.jsp" %>
             <section class="flex flex-col ">
                 <div class="flex mb-10 flex-col justify-center w-full">
@@ -45,7 +46,7 @@
                                 <label for="categorie_id"
                                        class="block text-sm font-medium leading-6 text-gray-900">Categorie</label>
                                 <div class="mt-2">
-                                    <select class="select ghost" id="categorie_id" name="categorie_id">
+                                    <select class="select ghost" style="background: white" id="categorie_id" name="categorie_id">
                                         <c:forEach var="cat" items="${categories}">
                                             <option value="${cat.getId()}">${cat.getLibelle()}</option>
                                         </c:forEach>
@@ -76,7 +77,7 @@
                             List of produits
                         </h1>
                         <div class="overflow-scroll">
-                            <table class="table bordered">
+                            <table class="table bordered bg-white">
                                 <thead>
                                     <tr>
                                         <th>Id</th>

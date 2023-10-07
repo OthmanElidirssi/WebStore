@@ -1,7 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="currentURI" value="${pageContext.request.requestURI}" />
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<nav class="bg-gray-800">
+
+<%
+    // Get the current URI from the request
+    String currentURI = (String) request.getAttribute("currentURI");
+%>
+
+
+<nav class="bg-gray-800 mb-4">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 <c:out value="${contextPath}"></c:out> <c:out value="${currentURI}"></c:out>">
             <div class="relative flex h-16 items-center justify-between">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -32,7 +39,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div class="flex flex-1 items-center md:justify-between sm:items-stretch sm:justify-start">
                     <div class="flex flex-shrink-0 items-center">
                         <img class="h-8 w-auto"
                              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
@@ -41,17 +48,18 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            <a href="/" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                               aria-current="page">Dashboard</a>
+                            <a href="/WebStore" class="${currentURI eq '/WebStore/' ? 'bg-gray-900 border border-gray-300' : ''} text-white rounded-md px-3 py-2 text-sm font-medium"
+                               >Dashboard</a>
 
                             <a href="categories"
-                               class="<c:if test="${'ayoub' == 'ayoub'}">active</c:if> text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Categories</a>
-                        <a href="products.jsp"
-                           class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Products</a>
-                        <a href="#"
-                           class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Commands</a>
-                        <a href="#"
-                           class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Command Product</a>
+                               aria-current="page"
+                               class="${currentURI eq '/WebStore/categories.jsp' ? 'bg-gray-900 border border-gray-300' : ''}  <c:if test="${'ayoub' == 'ayoub'}">active</c:if> text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Categories</a>
+                        <a href="produits"
+                           class="${currentURI eq '/WebStore/produits.jsp' ? 'bg-gray-900 border border-gray-300' : ''}   text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Products</a>
+                        <a href="commandes"
+                           class="${currentURI eq '/WebStore/commandes.jsp' ? 'bg-gray-900 border border-gray-300' : ''}  text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Commands</a>
+                        <a href="ligneCommandeProduit"
+                           class="${currentURI eq '/WebStore/ligneCommandeProduit.jsp' ? 'bg-gray-900 border border-gray-300' : ''}  text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Command Product</a>
                     </div>
                 </div>
             </div>
@@ -64,13 +72,13 @@
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href="/" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
                aria-current="page">Dashboard</a>
-            <a href="categories.jsp"
+            <a href="categories"
                class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Categories</a>
-            <a href="#"
+            <a href="produits"
                class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Products</a>
-            <a href="#"
+            <a href="commandes"
                class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Commands</a>
-            <a href="#"
+            <a href="ligneCommandeProduit"
                class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Command Product</a>
         </div>
     </div>
